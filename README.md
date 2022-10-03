@@ -1,4 +1,4 @@
-# My Diet
+# HealthyApp
 
 
 This app was created for tracking your daily ate meal calories and nutrients!
