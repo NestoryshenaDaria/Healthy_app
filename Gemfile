@@ -57,7 +57,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
-gem 'devise'
+
 gem 'httparty'
 gem 'dotenv-rails'
 gem 'pundit'
@@ -77,6 +77,7 @@ group :test do
   gem "webdrivers"
 end
 
+gem 'devise'
 gem "redis"
 gem 'redis-rails'
 gem "sidekiq"
