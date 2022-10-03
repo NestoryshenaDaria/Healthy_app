@@ -1,0 +1,84 @@
+<style>
+body {
+  background: radial-gradient(circle at 0% 0.5%, rgb(241, 241, 242) 0.1%, rgb(224, 226, 228) 100.2%);
+}
+h1 {
+  color: #D2691E;
+  font-family: Gill Sans, sans-serif;
+  margin-top: 1rem;
+  padding-bottom: 0.1rem;
+  text-align: center;
+  border: 3px solid #008B8B;
+  padding: 3px;
+}
+h4 {
+  color: #008B8B;
+  font-family: Gill Sans, sans-serif;
+  margin-top: 1rem;
+  padding-bottom: 0.1rem;
+  text-align: center;
+}
+.all{
+  color: #008B8B;
+  font-family: Gill Sans, sans-serif;
+  margin-top: 1rem;
+  padding-bottom: 0.1rem;
+  text-align: center;
+}
+.nutrients {
+  color: #556B2F;
+}
+.button {
+ background-color:#D2691E;
+ border-radius:28px;
+ border:1px solid #18ab29;
+ display:inline-block;
+ cursor:pointer;
+ color:#ffffff;
+ font-family:Arial;
+ font-size:17px;
+ padding:16px 31px;
+ text-decoration:none;
+ text-shadow:0px 1px 0px #2f6627;
+  margin: auto;
+  display: block;
+  width: 180px;
+  text-align: center;
+}
+.button:hover {
+ background-color:#008B8B;
+}
+p{
+  color: #D2691E;
+  font-family: Gill Sans, sans-serif;
+  margin-top: 1rem;
+  padding-bottom: 0.1rem;
+  text-align: center;
+}
+</style>
+
+<h1><%=@diet.name %></h1>
+    <h4>Description: <%= @diet.description %></h4>
+    <h4 class="all">Components: <%= @diet.components %></h4>
+  <h4>total_calories: <%= @diet.total_calories %></h4>
+  <p class="nutrients"><b>Nutrients:</b></p>
+  <% @diet.nutrients.except('name').each do |key, v| %>
+    <p><%= key.humanize %>: <%= v.truncate(2).to_s %></p>
+  <% end %>
+  <% if @diet.owner_id %>
+  <p>Owner: <%= User.find(@diet.owner_id).email %></p>
+<% else %>
+  <p>owner: Without owner</p>
+<% end %>
+
+<% if policy(@diet).destroy? %>
+  <%= button_to "Destroy Diet", diet_path(@diet), method: :delete, class:"button" %>
+<% end %>
+</br>
+  <%= button_to "Send report", diet_send_report_path(@diet), method: :post, class:"button" %>
+<h4>Diet total calories: <%= @diet.total_calories %></h4>
+<h4>Your eaten calories during the last day: <%= @meals.reduce(0) { |acc, el| acc +  el.calories } %></h4>
+<h1>Your meals: </h1>
+<% @meals.each do |meal| %>
+  <%= render partial: 'private_api/meals/meal', object: meal %>
+<% end %>

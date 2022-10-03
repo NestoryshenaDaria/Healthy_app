@@ -1,0 +1,60 @@
+<style>
+body {
+background: radial-gradient(circle at 10% 20%, rgb(215, 223, 252) 0%, rgb(255, 255, 255) 0%, rgb(215, 223, 252) 84%);
+}
+h1 {
+  color: #800080;
+  font-family: Marker Felt, fantasy;
+  margin-top: 1rem;
+  padding-bottom: 0.1rem;
+  text-align: center;
+}
+table, th, td{
+  border: 4px solid;
+  margin-left: auto;
+  margin-right: auto;
+}
+.table {
+  color: #4682B4;
+  font-family: Comic Sans MS, Comic Sans, cursive;
+  margin-top: 1rem;
+  padding-bottom: 0.1rem;
+  text-align: center;
+}
+.headers {
+  color: #00008B;
+  font-family: fantasy;
+  margin-top: 1rem;
+  padding-bottom: 0.1rem;
+  text-align: center;
+}
+.button {
+ background-color:#44c767;
+ border-radius:28px;
+ border:1px solid #18ab29;
+ display:inline-block;
+ cursor:pointer;
+ color:#ffffff;
+ font-family:Arial;
+ font-size:17px;
+ padding:16px 31px;
+ text-decoration:none;
+ text-shadow:0px 1px 0px #2f6627;
+  margin: auto;
+  text-align: center;
+}
+.button:hover {
+ background-color:#5cbf2a;
+}
+</style>
+
+<%= button_to "Add Meal", new_meal_path, method: :get, class:"button" %>
+
+<h1>Meals: </h1>
+<%= link_to "ONE DAY", meals_path(from: 1.day.ago), class: 'button' %>
+<%= link_to "ONE WEEK", meals_path(from: 1.week.ago), class: 'button' %>
+<%= link_to "ONE MONTH", meals_path(from: 1.month.ago), class: 'button' %>
+<%= link_to "ONE YEAR", meals_path(from: 1.year.ago), class: 'button' %>
+<% @meals.each do |meal| %>
+<%= render partial: 'meal', object: meal%>
+<% end %>
