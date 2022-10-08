@@ -298,7 +298,6 @@ DEPENDENCIES
   puma (~> 5.0)
   pundit
   rails (~> 7.0.3, >= 7.0.3.1)
-  redis
   redis-rails
   selenium-webdriver
   sidekiq
